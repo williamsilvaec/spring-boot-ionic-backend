@@ -1,5 +1,7 @@
 package com.williamsilva.cursomc.cursomc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class Produto implements Serializable {
     private String nome;
     private Double preco;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),
