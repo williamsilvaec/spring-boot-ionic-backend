@@ -1,5 +1,7 @@
 package com.williamsilva.cursomc.cursomc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +15,11 @@ public class Estado {
     private Integer id;
     private String nome;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "estado")
     private List<Cidade> cidades = new ArrayList<>();
+
+    public Estado(){}
 
     public Estado(String nome) {
         this.nome = nome;
