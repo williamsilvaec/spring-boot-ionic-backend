@@ -1,5 +1,6 @@
 package com.williamsilva.cursomc.cursomc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.williamsilva.cursomc.cursomc.model.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 

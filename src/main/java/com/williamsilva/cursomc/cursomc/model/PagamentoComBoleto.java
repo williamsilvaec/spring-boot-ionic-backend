@@ -1,5 +1,6 @@
 package com.williamsilva.cursomc.cursomc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.williamsilva.cursomc.cursomc.model.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
@@ -8,7 +9,10 @@ import java.time.LocalDate;
 @Entity
 public class PagamentoComBoleto extends Pagamento {
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPagamento;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataVencimento;
 
     public PagamentoComBoleto() {}
