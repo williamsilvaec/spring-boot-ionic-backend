@@ -1,5 +1,6 @@
 package com.williamsilva.cursomc.cursomc.resources.handler;
 
+import com.williamsilva.cursomc.cursomc.services.exception.DataIntegrityException;
 import com.williamsilva.cursomc.cursomc.services.exception.ObjetoNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,13 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> objetoNotFoundException(ObjetoNotFoundException e, HttpServletRequest request) {
         StandardError standardError = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
-//        return ResponseEntity.notFound().build();
     }
+
+    @ExceptionHandler(DataIntegrityException.class)
+    public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request) {
+        StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+
 }
