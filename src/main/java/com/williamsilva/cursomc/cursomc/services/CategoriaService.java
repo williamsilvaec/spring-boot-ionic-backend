@@ -21,4 +21,8 @@ public class CategoriaService {
 
         return categoria;
     }
+
+    public Categoria insert(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
 }
