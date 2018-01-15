@@ -1,5 +1,6 @@
 package com.williamsilva.cursomc.cursomc.resources;
 
+import com.williamsilva.cursomc.cursomc.dto.CategoriaDTO;
 import com.williamsilva.cursomc.cursomc.model.Categoria;
 import com.williamsilva.cursomc.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/categorias")
@@ -46,5 +49,17 @@ public class CategoriaResource {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<Categoria> categoriaList = categoriaService.findAll();
+
+        List<CategoriaDTO> categoriaDTOList = categoriaList
+                .stream()
+                .map(c -> new CategoriaDTO(c))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(categoriaDTOList);
     }
 }
