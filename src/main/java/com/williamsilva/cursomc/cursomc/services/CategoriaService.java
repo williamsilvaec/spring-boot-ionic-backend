@@ -1,5 +1,6 @@
 package com.williamsilva.cursomc.cursomc.services;
 
+import com.williamsilva.cursomc.cursomc.dto.CategoriaDTO;
 import com.williamsilva.cursomc.cursomc.model.Categoria;
 import com.williamsilva.cursomc.cursomc.repository.CategoriaRepository;
 import com.williamsilva.cursomc.cursomc.services.exception.DataIntegrityException;
@@ -54,5 +55,9 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = new PageRequest(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 }
